@@ -1,0 +1,161 @@
+---
+version: "0.1.0"
+name: "AEGIS Enterprise Monorepo"
+description: "Bootstrap manifest for complete project structure"
+
+folders:
+  # Applications
+  - apps/api
+  - apps/dashboard
+  - apps/worker
+  - apps/cli
+  
+  # Core Packages
+  - packages/core/src/aegis/core
+  - packages/core/tests
+  - packages/runtime/src/aegis/runtime
+  - packages/runtime/tests
+  - packages/agents/src/aegis/agents
+  - packages/agents/tests
+  - packages/memory/src/aegis/memory
+  - packages/memory/tests
+  - packages/tools/src/aegis/tools
+  - packages/tools/tests
+  - packages/llm/src/aegis/llm
+  - packages/llm/tests
+  - packages/plugins/src/aegis/plugins
+  - packages/plugins/tests
+  - packages/mcp/src/aegis/mcp
+  - packages/mcp/tests
+  - packages/security/src/aegis/security
+  - packages/security/tests
+  - packages/workflow/src/aegis/workflow
+  - packages/workflow/tests
+  - packages/sdk/src/aegis/sdk
+  - packages/sdk/tests
+  - packages/telemetry/src/aegis/telemetry
+  - packages/telemetry/tests
+  
+  # Infrastructure
+  - deployments
+  - docker
+  - docs
+  - scripts
+  - tests
+  - .github/workflows
+  - .devcontainer
+  - .vscode
+
+files:
+  root:
+    - path: ".editorconfig"
+      template: "editorconfig"
+    - path: ".gitattributes"
+      template: "gitattributes"
+    - path: ".gitignore"
+      template: "gitignore"
+    - path: ".pre-commit-config.yaml"
+      template: "pre-commit-config"
+    - path: "pyproject.toml"
+      template: "root-pyproject"
+    - path: "ruff.toml"
+      template: "ruff"
+    - path: "mypy.ini"
+      template: "mypy"
+    - path: "pytest.ini"
+      template: "pytest"
+    - path: "docker-compose.yml"
+      template: "docker-compose"
+    - path: "Makefile"
+      template: "Makefile"
+    - path: "LICENSE"
+      template: "LICENSE"
+    - path: "README.md"
+      template: "README"
+    - path: "Dockerfile"
+      template: "Dockerfile"
+    - path: ".env.example"
+      template: "env.example"
+    - path: "docker/.dockerignore"
+      template: "dockerignore"
+    - path: ".devcontainer/devcontainer.json"
+      template: "devcontainer"
+    - path: ".vscode/settings.json"
+      template: "vscode-settings"
+    - path: ".vscode/extensions.json"
+      template: "vscode-extensions"
+    - path: ".github/workflows/ci.yml"
+      template: "ci-workflow"
+    - path: "docs/ARCHITECTURE.md"
+      template: "ARCHITECTURE"
+    - path: "docs/CONTRIBUTING.md"
+      template: "CONTRIBUTING"
+    - path: "docs/DEPLOYMENT.md"
+      template: "DEPLOYMENT"
+    - path: "scripts/bootstrap.sh"
+      template: "bootstrap.sh"
+      executable: true
+    - path: "scripts/check.sh"
+      template: "check.sh"
+      executable: true
+
+packages:
+  core:
+    name: "aegis-core"
+    description: "Core domain models and interfaces"
+    dependencies: []
+  
+  runtime:
+    name: "aegis-runtime"
+    description: "Runtime execution engine"
+    dependencies: ["aegis-core"]
+  
+  agents:
+    name: "aegis-agents"
+    description: "Agent framework"
+    dependencies: ["aegis-core", "aegis-runtime"]
+  
+  memory:
+    name: "aegis-memory"
+    description: "Memory and knowledge management"
+    dependencies: ["aegis-core"]
+  
+  tools:
+    name: "aegis-tools"
+    description: "Tool integration framework"
+    dependencies: ["aegis-core"]
+  
+  llm:
+    name: "aegis-llm"
+    description: "LLM integration layer"
+    dependencies: ["aegis-core"]
+  
+  plugins:
+    name: "aegis-plugins"
+    description: "Plugin system"
+    dependencies: ["aegis-core"]
+  
+  mcp:
+    name: "aegis-mcp"
+    description: "Model Context Protocol"
+    dependencies: ["aegis-core"]
+  
+  security:
+    name: "aegis-security"
+    description: "Security and authentication"
+    dependencies: ["aegis-core"]
+  
+  workflow:
+    name: "aegis-workflow"
+    description: "Workflow orchestration"
+    dependencies: ["aegis-core", "aegis-runtime"]
+  
+  sdk:
+    name: "aegis-sdk"
+    description: "Public SDK"
+    dependencies: ["aegis-core", "aegis-runtime", "aegis-agents"]
+  
+  telemetry:
+    name: "aegis-telemetry"
+    description: "Observability and monitoring"
+    dependencies: ["aegis-core"]
